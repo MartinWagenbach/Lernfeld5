@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Übungsklausur {
     
-    	public static void main(String args[]) {
+    public static void main(String args[]) {
 		//Aufgabe 1a
 		int whole = 0, 
 			whole2 = 0, 
