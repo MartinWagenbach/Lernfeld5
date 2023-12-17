@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Grundlagen7 {
     
-    	public static void main(String args[]) {
+    public static void main(String args[]) {
 		//Aufgabe a
 		double dm = 9876.54;
 
