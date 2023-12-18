@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 public class Game {
     
+	private Database database = new Database();
     private Random random = new Random();
 	
 	private int randomNumber;
