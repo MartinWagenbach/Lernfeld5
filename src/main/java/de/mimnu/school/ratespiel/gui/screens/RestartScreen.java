@@ -43,9 +43,17 @@ public class RestartScreen {
 			}
 		});
 		
+		Button exitButton = new Button("Beenden");
+		exitButton.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				System.exit(0);
+			}
+		});
 		
 		HBox buttons = new HBox(10);
-		buttons.getChildren().addAll(restartButton, menuButton);
+		buttons.getChildren().addAll(restartButton, menuButton, exitButton);
 		buttons.setAlignment(Pos.CENTER);
 		
 		VBox layout = new VBox(10);

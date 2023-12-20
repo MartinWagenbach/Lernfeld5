@@ -1,5 +1,6 @@
 package de.mimnu.school.ratespiel.gui.screens;
 
+import de.mimnu.school.ratespiel.gui.main.Main;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -15,7 +16,7 @@ public class StartScreen {
     private Scene scene;
 	
 	public void setScreen(Stage stage) {
-		Label welcome = new Label("Herzlich Willkommen beim Ratespiel. :)");
+		Label welcome = new Label("Herzlich Willkommen beim Ratespiel " + Main.getInstance().getUser().getActiveUsername() + " . :)");
 		
 		Button startButton = new Button("Start");
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -36,9 +37,17 @@ public class StartScreen {
 			}
 		});
 		
-		
+		Button exitButton = new Button("Beenden");
+		exitButton.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				System.exit(0);
+			}
+		});
+
 		HBox buttons = new HBox(10);
-		buttons.getChildren().addAll(startButton, highscoreButton);
+		buttons.getChildren().addAll(startButton, highscoreButton, exitButton);
 		buttons.setAlignment(Pos.CENTER);
 		
 		VBox layout = new VBox(10);
