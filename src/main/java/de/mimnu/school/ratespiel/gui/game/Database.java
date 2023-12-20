@@ -18,6 +18,24 @@ public class Database {
 		createTable();
 	}
 	
+	private Connection connect() {
+		try {
+			return DriverManager.getConnection("jdbc:sqlite:Ratespiel.db");
+		} catch(SQLException e) {
+			return null;
+		}
+	}
+	
+	private void close(Connection connection) {
+		try {
+			if(connection != null) {
+				connection.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private void createTable() {
 		Connection connection = connect();
 		
@@ -35,22 +53,29 @@ public class Database {
 			close(connection);
 		}
 	}
-	
-	private Connection connect() {
-		try {
-			return DriverManager.getConnection("jdbc:sqlite:Ratespiel.db");
-		} catch(SQLException e) {
-			return null;
-		}
-	}
-	
-	private void close(Connection connection) {
-		try {
-			if(connection != null) {
-				connection.close();
+
+	public void loadCache() {
+		Connection connection = connect();
+
+		String sql = "SELECT id, username, round, roundTime FROM users";
+
+		try(PreparedStatement statement = connection.prepareStatement(sql)) {
+			try(ResultSet resultSet = statement.executeQuery()) {
+				while(resultSet.next()) {
+					int id = resultSet.getInt("id");
+		   			String username = resultSet.getString("username");
+		   			int round = resultSet.getInt("round");
+		   			long time = resultSet.getLong("roundTime");
+
+		   			playernames.put(id, username);
+		   			rounds.put(id, round);
+		   			roundTime.put(id, time);
+	  			}
 			}
-		} catch (SQLException e) {
+		} catch(SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(connection);
 		}
 	}
 
