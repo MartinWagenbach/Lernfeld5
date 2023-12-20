@@ -2,6 +2,8 @@ package de.mimnu.school.ratespiel.gui.game;
 
 import java.util.Random;
 
+import de.mimnu.school.ratespiel.gui.database.User;
+import de.mimnu.school.ratespiel.gui.main.Main;
 import de.mimnu.school.ratespiel.gui.screens.RestartScreen;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,12 +12,13 @@ import javafx.stage.Stage;
 
 public class Game {
     
+	private User user = Main.getInstance().getUser();
+
     private Random random = new Random();
 	
 	private int randomNumber;
 	private int guessedNumber;
 	private int round = 0;
-	private int game = 0;
 	private long roundStart;
 	
 	public Game() {
@@ -54,15 +57,25 @@ public class Game {
 	}
 	
 	private void checkGuessedNumber(Stage stage, TextField input, Label output, Button plusTwentyButton, Button minusTwentyButton) {
+		String name = user.getActiveUsername();
+
 		round++;
 		
 		input.setText("");
 		
 		if(guessedNumber != -1) {
 			if(guessedNumber == randomNumber) {
-				game++;
-				
-				//Spieldaten in der Datenbank speichern!
+				if(user.getBestRound(name) == 0) {
+					user.setBestRound(name, round);
+				} else if(user.getBestRound(name) > round) {
+					user.setBestRound(name, round);
+				}
+
+				if(user.getBestRoundTime(name) == 0) {
+					user.setBestRoundTime(name, System.currentTimeMillis() - roundStart);
+				} else if(user.getBestRoundTime(name) > System.currentTimeMillis() - roundStart) {
+					user.setBestRoundTime(name, System.currentTimeMillis() - roundStart);
+				}
 				
 				new RestartScreen().setScreen(stage);
 			} else if(guessedNumber < randomNumber) {
