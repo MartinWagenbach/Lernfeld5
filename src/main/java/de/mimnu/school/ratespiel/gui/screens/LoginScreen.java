@@ -1,6 +1,6 @@
 package de.mimnu.school.ratespiel.gui.screens;
 
-import de.mimnu.school.ratespiel.gui.game.Database;
+import de.mimnu.school.ratespiel.gui.database.User;
 import de.mimnu.school.ratespiel.gui.main.Main;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,13 +16,23 @@ import javafx.stage.Stage;
 
 public class LoginScreen {
 
-    private Database database = Main.getInstance().getDatabase();
+    private User user = Main.getInstance().getUser();
+
     private Scene scene;
 	
 	public void setScreen(Stage stage) {
 		Label hint = new Label("Wie möchtest du heißen?");
 
         TextField input = new TextField();
+		input.textProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if(newValue.length() > 20) {
+					input.setText(oldValue);
+				}
+			}
+		});
 
         Button confirmButton = new Button("Bestätigen");
 		confirmButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -31,9 +41,11 @@ public class LoginScreen {
 			public void handle(ActionEvent event) {
 				String name = input.getText().trim().replaceAll(" ", "");
 
-				if(!database.userExists(name)) {
-					database.addUser(name);
+				if(!user.exists(name)) {
+					user.add(name);
 				}
+
+				user.setActivePlayer(name);
 
                 new StartScreen().setScreen(stage); 
 			}
