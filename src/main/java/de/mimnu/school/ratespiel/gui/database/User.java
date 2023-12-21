@@ -45,10 +45,12 @@ public class User {
 	public void add(String username) {
 		Connection connection = database.connect();
 
-		String sql = "INSERT INTO user (username) VALUES (?)";
+		String sql = "INSERT INTO user (username, bestRound, bestRoundTime) VALUES (?, ?, ?)";
 
 		try(PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setString(1, username);
+			statement.setInt(2, 0);
+			statement.setLong(3, 0);
 			statement.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -57,6 +59,8 @@ public class User {
 
             if(!exists(username)) {
                 user.add(username);
+				bestRounds.put(username, 0);
+				bestRoundTimes.put(username, 0L);
             }
 		}
 	}
