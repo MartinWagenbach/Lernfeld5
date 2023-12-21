@@ -34,8 +34,8 @@ public class Database {
 		
 		String sql = "CREATE TABLE IF NOT EXISTS user ("
 				+ "username TEXT PRIMARY KEY,"
-				+ "bestRound INTEGER,"
-				+ "bestRoundTime LONG)";
+				+ "bestRound INTEGER NOT NULL,"
+				+ "bestRoundTime LONG NOT NULL)";
 		
 		try(PreparedStatement statement = connection.prepareStatement(sql);) {
 			statement.executeUpdate();

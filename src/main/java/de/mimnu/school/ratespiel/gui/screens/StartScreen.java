@@ -16,7 +16,7 @@ public class StartScreen {
     private Scene scene;
 	
 	public void setScreen(Stage stage) {
-		Label welcome = new Label("Herzlich Willkommen beim Ratespiel " + Main.getInstance().getUser().getActiveUsername() + " . :)");
+		Label welcome = new Label("Herzlich Willkommen beim Ratespiel " + Main.getInstance().getUser().getActiveUsername() + ". :)");
 		
 		Button startButton = new Button("Start");
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
