@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Ratespiel {
     
-    	public static void main(String args[]) {
+    public static void main(String args[]) {
 		Random zufall = new Random();
 		Scanner eingabe = new Scanner(System.in);
 		
