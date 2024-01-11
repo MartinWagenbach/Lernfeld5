@@ -33,7 +33,7 @@ public class StartScreen {
 			
 			@Override
 			public void handle(ActionEvent event) {
-				new HighscoreScreen().setScreen(stage);
+				//Highscore Screen fehlt.
 			}
 		});
 		
