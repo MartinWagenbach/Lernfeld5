@@ -140,6 +140,10 @@ public class User {
 		return user.contains(username);
 	}
 
+	public ArrayList<String> getUsernames() {
+		return user;
+	}
+
 	public int getBestRound(String username) {
 		return bestRounds.get(username);
 	}
