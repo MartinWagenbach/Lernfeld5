@@ -14,11 +14,21 @@ public class Lernjob4_1 {
         System.out.println("Platz 2: " + array[2] + "\n");
 
         //Aufgabe 2
-        int[] array2 = new int[11];
+        int[] array2 = new int[10];
 
-        for(int i = 1; i <= array2.length; i++) {
-            array2[i] = i * 10;
+        for(int i = 0; i < array2.length; i++) {
+            array2[i] = (i + 1) * 10;
             System.out.println("Platz " + i + ": " + array2[i]);
+        }
+
+        System.out.println("\n");
+
+        //Aufgabe 3
+        float[] array3 = new float[100];
+
+        for(int i = 0; i < array3.length; i++) {
+            array3[i] = (i + 1);
+            System.out.println("Platz " + i + ": " + array3[i]);
         }
     }
 }
